@@ -1,0 +1,60 @@
+<div class="card text-center m-3">
+    <mat-toolbar color="primary">
+        <span class="fill-remaining-space">Phone Number Generator</span>
+    </mat-toolbar>
+
+    <div class="container">
+
+        <form [formGroup]="generateForm" (ngSubmit)="onSubmit()" class="form">
+            <mat-form-field class="form-element">
+                <input matInput placeholder="Phone Number" formControlName="phoneNumber" required>
+                <mat-error *ngIf="generateForm.get('phoneNumber').hasError('required')">
+                    Phone Number is Required!
+                </mat-error>
+                <mat-error *ngIf="generateForm.get('phoneNumber').hasError('pattern')">
+                    Please enter a 7 or 10 digit Number !
+                </mat-error>
+            </mat-form-field>
+            <div class="form-element">
+                <button mat-raised-button color="primary" type="submit" class="button">Generate</button>
+            </div>
+        </form>
+    </div>
+    <div class="container" *ngIf="showResults">
+        <h1>Total number of combinations: {{totalCombinations }} </h1>
+    </div>
+    <br>
+    <div [hidden]="!showResults">
+        <div class="container">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8 Col-md-12">
+                <ng-container matColumnDef="phoneNbr">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+            </mat-table>
+        </div>
+
+
+        <div class="card-footer pb-0 pt-3">
+            <ul *ngIf="subItems && totalCombinations" class="pagination">
+                <li class="page-item first-item">
+                    <a routerLink [queryParams]="{ page: 0 }" class="page-link">First</a>
+                <li class="page-item previous-item">
+                    <a routerLink [queryParams]="{ page: prevPage }" class="page-link">Previous</a>
+                <li *ngFor="let page of subItems" [ngClass]="{active:pager.currentPage === page}"
+                    class="page-item number-item">
+                    <a routerLink [queryParams]="{ page: page-1 }" class="page-link">{{page}}</a>
+                </li>
+                <li class="page-item next-item">
+                    <a routerLink [queryParams]="{ page: nextPage }" class="page-link">Next</a>
+                </li>
+                <li class="page-item last-item">
+                    <a routerLink [queryParams]="{ page: lastPage-1 }" class="page-link">Last</a>
+            </ul>
+        </div>
+
+    </div>
+</div>

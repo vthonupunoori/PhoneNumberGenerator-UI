@@ -1,0 +1,44 @@
+.container {
+    display:flex;
+    justify-content: center;
+    
+  }
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  
+.center-align {
+  text-align: center;
+}
+
+.form-element {
+    padding: 5px 0px 25px 2px;
+    width: 100%;
+  }
+
+.button {
+    width: 100%;
+    background: #3f51b5;
+    color: #fff;
+    line-height: 2.5;
+}
+
+mat-table {
+  width: 20%;
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+mat-header-cell, mat-cell {
+  justify-content: center;
+  text-align: center;
+}
+mat-header-cell {
+font-size: large;
+}
+
